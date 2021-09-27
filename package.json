@@ -10,8 +10,8 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "brain.js": "^2.0.0-beta.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "synaptic": "^1.1.4"
   },
   "devDependencies": {}
 }

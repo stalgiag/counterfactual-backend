@@ -1,6 +1,6 @@
 const express = require('express')
 const fs = require('fs');
-const brain = require('brain.js')
+const synaptic = require('synaptic')
 const app = express()
 const port = 3000
 
@@ -12,10 +12,13 @@ const config = {
     outputSize: 20,
     learningRate: 0.01,
     decayRate: 0.999,
-  };
+    binaryThresh: 0.5,
+    hiddenLayers: [3], 
+    activation: 'sigmoid'
+};
   
-  // create a simple recurrent neural network
-  const net = new brain.recurrent.RNN(config);
+  
+const net = new synaptic.Architect.LSTM(10, 6, 1);
 
 let humanOutputStream = fs.createWriteStream('./data/human.json', { flags: 'a' });
 let botOutputStream = fs.createWriteStream('./data/bot.json', { flags: 'a' });
@@ -31,12 +34,5 @@ app.listen(port, () => {
 })
 
 function train() {
-    net.train(trainData, {
-        errorThresh: 0.005,  
-        iterations: 20000,   
-        log: true,           
-        logPeriod: 10,       
-        learningRate: 0.3    
-    });
-
+    
 }
